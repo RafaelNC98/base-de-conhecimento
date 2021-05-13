@@ -10,7 +10,7 @@ module.exports = app => {
 
         const lastStat = await Stat.findOne({}, {},
             { sort: { 'createdAt': -1 } })
-        
+
         const stat = new Stat({
             users: usersCount.count,
             categories: categoriesCount.count,
@@ -22,8 +22,8 @@ module.exports = app => {
         const changeUsers = !lastStat || stat.users !== lastStat.users
         const changeCategories = !lastStat || stat.categories !== lastStat.categories
         const changeArticles = !lastStat || stat.articles !== lastStat.articles
-        
-        if(changeUsers || changeCategories || changeArticles) {
+
+        if (changeUsers || changeCategories || changeArticles) {
             stat.save().then(() => console.log('[Stats] Estatíticas atualizadas!'))
         }
     })
